@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="#{lokalizacija.language}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" >
+    <f:view locale="#{lokalizacija.locale}">
+        <h:head>
+            <title>#{tekst['index_naslov']}</title>
+        </h:head>
+        <h:body>
+            <ui:composition template="template/common/layout.xhtml">
+                <ui:define name="content">
+                    <div class="content">
+                        <h:form class="form-group">
+                            <p:commandButton value="#{tekst['index_akcijaSlanje']}" id="slanje" title="#{tekst['index_akcijaSlanjeTooltip']}" action="#{navigacija.slanjePorukeLink()}"/> 
+                            <p:tooltip id="slanjeTooltip" for="slanje" trackMouse="true" />
+                            <br/>
+                            <br/>
+                            
+                            <p:commandButton value="#{tekst['index_akcijaPregled']}" id="pregled" title="#{tekst['index_akcijaPregledTooltip']}" action="#{navigacija.pregledPorukaLink()}" />
+                            <p:tooltip id="pregledTooltip" for="pregled" trackMouse="true" />
+                        </h:form>
+                    </div>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>

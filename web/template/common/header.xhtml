@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="#{lokalizacija.language}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view locale="#{lokalizacija.locale}">
+        <h:form>            
+            <h:panelGrid columns="9" style="margin-bottom:20px;" cellpadding="10">
+                <p:outputLabel for="jezici" value="#{tekst['index_izborJezika']}: " />
+                <p:selectOneMenu id="jezici" value="#{lokalizacija.language}">
+                    <f:selectItems 
+                        value="#{lokalizacija.jezici}" 
+                        var="jezik" 
+                        itemLabel="#{jezik.labela}" 
+                        itemValue="#{jezik.vrijednost}" />
+                </p:selectOneMenu>
+                <p:commandButton update="@all" type="submit" value="#{tekst['index_izborJezika']}" icon="ui-icon-check" />   
+                
+                <p:commandLink rendered="#{navigacija.pocetnaOmogucena}" value="#{tekst['index_akcijaPocetna']}" id="pocetna" title="#{tekst['index_akcijaPocetnaTooltip']}" action="#{navigacija.pocetnaLink()}" />
+                <p:tooltip id="pocetnaTooltip" for="pocetna" trackMouse="true" />
+                
+                <p:commandLink rendered="#{navigacija.slanjeOmoguceno}" value="#{tekst['index_akcijaSlanje']}" id="slanje" title="#{tekst['index_akcijaSlanjeTooltip']}" action="#{navigacija.slanjePorukeLink()}"/> 
+                <p:tooltip id="slanjeTooltip" for="slanje" trackMouse="true" />
+
+                <p:commandLink rendered="#{navigacija.pregledOmogucen}" value="#{tekst['index_akcijaPregled']}" id="pregled" title="#{tekst['index_akcijaPregledTooltip']}" action="#{navigacija.pregledPorukaLink()}" />
+                <p:tooltip id="pregledTooltip" for="pregled" trackMouse="true" />
+            </h:panelGrid>
+        </h:form>
+    </f:view>
+</html>

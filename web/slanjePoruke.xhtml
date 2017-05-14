@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="#{lokalizacija.language}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" >
+    <f:view locale="#{lokalizacija.locale}">
+        <h:head>
+            <title>#{tekst['slanje_naslov']}</title>
+        </h:head>
+        <h:body>
+            <ui:composition template="template/common/layout.xhtml">
+                <ui:define name="content">
+                    <div class="content">
+
+                        <h:form>
+
+                            <p:inputText id="primatelj" required="true" size="40"
+                                         value="#{slanjePoruke.primatelj}"
+                                         requiredMessage="Please enter your email address."
+                                         validatorMessage="Invalid email format">
+                                <f:validateRegex
+                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            </p:inputText>
+                            <p:watermark for="primatelj" value="#{tekst['slanjePoruke_email_primatelja']}" />
+                            
+                            <br/>
+                            
+                             <p:inputText id="posiljatelj" required="true" size="40"
+                                         value="#{slanjePoruke.posiljatelj}">
+                            </p:inputText>
+                            <p:watermark for="posiljatelj" value="#{tekst['slanjePoruke_email_posiljatelja']}" />
+                            
+                            <br/>
+                            
+                            <p:inputText id="predmet" required="true" size="40"
+                                         value="#{slanjePoruke.predmet}">
+                            </p:inputText>
+                            <p:watermark for="predmet" value="#{tekst['slanjePoruke_predmet']}" />
+                            
+                            <br/>
+                            
+                            <p:inputTextarea id="tekst" required="true"
+                                             value="#{slanjePoruke.tekst}">
+                            </p:inputTextarea>
+                            <p:watermark for="tekst" value="#{tekst['slanjePoruke_poruka']}" />
+
+                            <br/>
+                            
+                            <p:commandButton
+                                disabled="#{!slanjePoruke.slanjeOmoguceno}" value="#{tekst['slanjePoruke_akcijaSlanje']}" style="margin:20px"
+                                             action="#{slanjePoruke.saljiPoruku()}" update="@all" />
+                            
+                            <p:outputLabel class="danger" value="#{slanjePoruke.poruka}" />
+                        </h:form>
+                    </div>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>

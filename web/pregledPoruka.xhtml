@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="#{lokalizacija.language}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" >
+    <f:view locale="#{lokalizacija.locale}">
+        <h:head>
+            <title>#{tekst['index_naslov']}</title>
+        </h:head>
+        <h:body>
+            <ui:composition template="template/common/layout.xhtml">
+                <ui:define name="content">
+                    <div class="content">
+
+                        <h:form>
+
+                            <p:panelGrid columns="3" style="width: 700px">
+                                <p:outputLabel for="odabirMape" value="#{tekst['pregledPoruka_odaberiMapu']}: " />
+                                <p:selectOneMenu id="odabirMape" value="#{pregledPoruka.izabranaMapa}">
+                                    <f:selectItems 
+                                        value="#{pregledPoruka.preuzeteMape}" 
+                                        var="mapa" 
+                                        itemLabel="#{mapa.labela}" 
+                                        itemValue="#{mapa.vrijednost}" />
+                                </p:selectOneMenu>
+                                <p:commandButton update="@all" actionListener="#{pregledPoruka.promjenaMape()}" value="#{tekst['pregledPoruka_promijeniMapu']}" icon="ui-icon-check" />   
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="3" style="width: 700px">
+                                <p:outputLabel for="pretragaPoruka" value="#{tekst['pregledPoruka_pretragaPoruka']}: " />
+                                <p:inputText id="pretragaPoruka" value="#{pregledPoruka.izrazZaPretragu}" />
+                                <p:commandButton update="@all" actionListener="#{pregledPoruka.traziPoruke()}" value="#{tekst['pregledPoruka_pretragaPoruka']}" icon="ui-icon-search" />   
+                            </p:panelGrid>
+
+                            <p:dataTable id="poruke" var="poruka" value="#{pregledPoruka.preuzetePoruke}">
+                                <p:column headerText="Id">
+                                    <h:outputText value="#{poruka.id}" />
+                                </p:column>
+
+                                <p:column headerText="#{tekst['pregledPoruka_poruka_predmet']}">
+                                    <h:outputText value="#{poruka.predmet}" />
+                                </p:column>
+
+                                <p:column headerText="#{tekst['pregledPoruka_poruka_sadrzaj']}">
+                                    <h:outputText value="#{poruka.sadrzaj}" />
+                                </p:column>
+
+                                <p:column headerText="#{tekst['pregledPoruka_poruka_salje']}">
+                                    <h:outputText value="#{poruka.salje}" />
+                                </p:column>
+
+                                <p:column headerText="#{tekst['pregledPoruka_poruka_vrijemePrijema']}">
+                                    <h:outputText value="#{poruka.vrijemePrijema}">
+                                        <f:convertDateTime pattern="#{tekst['pregledPoruka_poruka_formatDatuma']}" />
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column headerText="#{tekst['pregledPoruka_poruka_vrijemeSlanja']}">
+                                    <h:outputText value="#{poruka.vrijemeSlanja}">
+                                        <f:convertDateTime pattern="#{tekst['pregledPoruka_poruka_formatDatuma']}" />
+                                    </h:outputText>
+                                </p:column>
+
+                                <p:column headerText="#{tekst['pregledPoruka_poruka_vrsta']}">
+                                    <h:outputText value="#{poruka.vrsta}" />
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:panelGrid columns="4" style="width: 700px">
+                                <p:outputLabel for="ukupnoPoruka" value="#{tekst['pregledPoruka_ukupnoPoruka']}: " />
+                                <h:outputText id="ukupnoPoruka" value="#{pregledPoruka.ukupanBrojPoruka}" />
+
+                                <p:commandButton id="prev" disabled="#{!pregledPoruka.prethodnaStranicaOmogucena}" 
+                                                 update="@all" actionListener="#{pregledPoruka.prethodnePoruke()}" 
+                                                 value="#{tekst['pregledPoruka_prethodnePoruke']}" 
+                                                 icon="ui-icon-seek-prev" />
+                                
+                                <p:commandButton id="next" disabled="#{!pregledPoruka.sljedecaStranicaOmogucena}" 
+                                                 update="@all" actionListener="#{pregledPoruka.sljedecePoruke()}" 
+                                                 value="#{tekst['pregledPoruka_sljedecePoruke']}" 
+                                                 icon="ui-icon-seek-next" />
+                            </p:panelGrid>
+                        </h:form>
+                    </div>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
