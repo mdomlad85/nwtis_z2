@@ -38,7 +38,7 @@ JavaMail API nalazi se na adresi: https://javamail.java.net/nonav/docs/api/
 
 JavaMail FAQ nalaze se na adresi http://www.oracle.com/technetwork/java/faq-135477.html
 
-#Instalacija James-a
+# Instalacija James-a
 James 3.0.
 preuzeti James verziju 3.0 ovdje
 http://james.apache.org/
